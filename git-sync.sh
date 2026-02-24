@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # This is a useful script that automatically creates the commit and pushes it to GitHub
+
 git add .
 
 echo "Please insert the commit message (leave empty for Automatic Update):"
@@ -18,3 +19,4 @@ echo "Uploading..."
 git push origin main
 
 echo "Done! :D"
+sleep 3
