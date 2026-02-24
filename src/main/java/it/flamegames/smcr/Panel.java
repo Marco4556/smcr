@@ -1,29 +1,30 @@
 package it.flamegames.smcr;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.Graphics2D;
 
-public class Panel extends JPanel implements KeyListener {
-    private BufferedImage mayoImage;
+public class Panel extends JPanel implements KeyListener, MouseListener, ActionListener {
+    private Scene currentScene;
+    private Timer timer;
 
     public Panel() {
         setPreferredSize(new Dimension(960, 720));
         setBackground(new Color(0, 0, 0));
 
-        try{
-            mayoImage = ImageIO.read(new File("src/main/sprites/mayo.png"));
-        } catch(Exception e){
-            System.out.println("Can't find sprite(s)!");
-            e.printStackTrace();
-        }
+        timer = new Timer(16, this);
+        timer.start();
+
+        currentScene = new GameScene();
     }
 
     @Override
@@ -31,24 +32,52 @@ public class Panel extends JPanel implements KeyListener {
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(mayoImage, 100, 100, null);
+        currentScene.draw(g2d);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyPressed'");
+        
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
+        
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
+        
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        currentScene.mousePressed(e);
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        currentScene.update();
+        repaint();
     }
 }

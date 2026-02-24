@@ -11,6 +11,7 @@ public class Main {
         Panel panel = new Panel();
         frame.add(panel);
         frame.addKeyListener(panel);
+        frame.addMouseListener(panel);
 
         frame.setSize(960, 720);
         frame.setResizable(false);
